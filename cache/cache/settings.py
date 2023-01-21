@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'library'
+    'library',
+    'crud.apps.CrudConfig',
+    'clearcache',
+    'account.apps.AccountConfig'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +142,5 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 #      }
 #  }
 
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'

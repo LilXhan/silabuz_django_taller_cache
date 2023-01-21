@@ -18,3 +18,4 @@ class Book(models.Model):
 
     class Meta:
         db_table = 'books'
+        ordering = ['-id']

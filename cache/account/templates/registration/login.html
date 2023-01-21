@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Login</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <label class="form-label">Username</label>
+      <input class="form-control" name="username" type="text">
+      <label class="form-label">Password</label>
+      <input class="form-control" name="password" type="password">
+      <div class="d-grid">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

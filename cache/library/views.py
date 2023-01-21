@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic import View, ListView, TemplateView
+from django.views.generic import View, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Book
 
 import urllib.request
 import json
 
-class GetBookQuery(TemplateView):
+
+class GetBookQuery(LoginRequiredMixin, TemplateView):
 
     template_name = '10Books.html'
 
@@ -17,7 +19,7 @@ class GetBookQuery(TemplateView):
 
         return context
 
-class AuthorView(View):
+class AuthorView(LoginRequiredMixin, View):
 
     def get(self, request, id, author):
 
@@ -40,7 +42,7 @@ class AuthorView(View):
             return redirect('select-book', id=id)
 
 
-class BookDetail(View):
+class BookDetail(LoginRequiredMixin, View):
 
     def get(self, request, id):
         context = {}
@@ -54,12 +56,21 @@ class BookDetail(View):
             return render(request, "oneBook.html", context)
 
 
-class ListBookView(ListView):
-    model = Book 
-    template_name = 'index.html'
+class ListBookView(LoginRequiredMixin, View):
+    
+    def get(self, request):
+
+        books = Book.objects.all()[:2]
+
+        context = {
+            'books': books
+        }
+
+        return render(request, 'index.html', context)
 
 
-class LoadDataView(View):
+
+class LoadDataView(LoginRequiredMixin, View):
     def get(self, request):
 
         url = 'https://silabuzinc.github.io/books/books.json'
