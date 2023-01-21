@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% if book %}
+
+<h3>Book: {{book.id}}</h3>
+
+<ul>
+  <li>{{book.title}}</li>
+  <li>
+    <a href="{% url 'authors' book.id 'author' %}" >{{book.authors}}</a>
+  </li>
+  <li>{{book.average_rating}}</li>
+  <li>{{book.isbn}}</li>
+</ul>
+
+{% else %}
+
+<h1>No existe el libro</h1>
+
+{% endif %}
+
+{% endblock %}

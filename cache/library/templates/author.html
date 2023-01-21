@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% if authors %}
+
+  <p>{{authors}}</p>
+
+{% else %}
+
+  <h2>No existe el autor</h2>
+  
+{% endif %}
+
+{% endblock %}

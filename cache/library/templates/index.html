@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2 class="mt-2">Books</h2>
+<hr>
+
+<ul class="list-group">
+{% load cache %}
+{% cache 300 sidebar %}
+  {% for object in object_list %}
+    <div class="d-flex justify-content-between align-items-center">
+      <li class="list-group-item">
+        <h2>{{object.title}}</h2>
+        <a href="{% url 'select-book' object.id %}" class="btn btn-primary">Ver</a>
+      </li>
+    </div>
+  {% endfor %}
+{% endcache %}
+</ul>
+{% endblock %}
